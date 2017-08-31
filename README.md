@@ -48,6 +48,10 @@ Sections:
 1. [A Sorting Problem](#part-11-a-sorting-problem)
 1. [Gloat in Victory](#part-12-gloat-in-victory)
 ## Instructions
+1. Now we need to change what happens when a square is clicked. Since component state is always private, we can't update Board's state directly from Square.
+
+    The usual pattern here is pass down a function from Board to Square that gets called when the square is clicked. Change renderSquare in Board again so that it reads:
+
     <details>
       <summary>Show Code</summary>
 
