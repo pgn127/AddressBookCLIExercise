@@ -34,25 +34,27 @@ Flags normally have shortened versions, so `--cookies` is equivalent to `-c`.
 Flags, commands, and parameters are all specific kind of arguments. A flag is usually setting a Boolean and starts with a `-` , a command usually follows the main program and modifies or specifies the specific behavior (`square` and `add` in the calculator example above), and a parameter is usually what the command is taking in as its input.
 
 
-## Instructions
-### The Address Book
-Our Address Book data is stored in the file called data.json. The address book is an array objects. Each object represents a Contact and has three properties
-    1. name: a string (letters only!), name of the contact
-    2. number: a number (numbers only!), phone number of contact
-    3. email: an email, email of contact
+
+## Introduction - The Address Book
+Our Address Book data is stored in the file called data.json. The address book is an array objects. Each object represents a Contact and has three properties:
+ 1. name: a string (letters only!), name of the contact
+ 2. number: a number (numbers only!), phone number of contact
+ 3. email: an email, email of contact
+
 
 Our Address Book can be accessed from within addressBook.js using our `data` variable (this is already done for you at the top of the file):
-[data](./img/datafile.png)
+
+<img src="./img/datafile.png" width="350">
+
 
 ### Steps
 Sections:
-1. [Install React Development Tools](#part-1-install-react-development-tools)
-1. [The Square Component](#part-2-the-square-component)
-1. [Lifting State Up](#part-3-lifting-state-up)
-1. [Taking Turns](#part-4-taking-turns)
-1. [Winner Calculator](#part-5-winner-calculation)
-1. [Storing and Showing History](#part-6-storing-and-showing-history)
-1. [Time Travel](#part-7-time-travel)
+1. [Parsing Command Line Arguments](#part-1-parsing-command-line-arguments)
+1. [Implementing the 'display' command](#part-2-implementing-the-display-command)
+1. [Implementing the 'add' command](#part-3-implementing-the-add-command)
+1. [Implementing the 'update' command](#part-4-implementing-the-update-command)
+1. [Implementing the 'delete' command](#part-5-implementing-the-delete-command)
+
 
 ### Features
 
@@ -66,17 +68,19 @@ Our command line Address Book manager should support the following commands:
 - display
   - Example: `node addressBook.js add John 1234567` - Adds a new Contact item with name `John` and number 1234567
 
-## Part 1: Implementing 'display' command
+
+## Part 1: Parsing Command Line Arguments
+
+## Part 2: Implementing the 'display' command
 ### Goal
 
-
-## Part 2: Implementing 'add' command
+## Part 3: Implementing the 'add' command
 ### Goal
 
-## Part 3: Implementing 'update' command
+## Part 4: Implementing the 'update' command
 ### Goal
 
-## Part 4: Implementing 'remove' command
+## Part 5: Implementing the 'delete' command
 ### Goal
 
 1. Now we need to change what happens when a square is clicked. Since component state is always private, we can't update Board's state directly from Square.
