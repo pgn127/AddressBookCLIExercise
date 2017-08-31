@@ -33,8 +33,36 @@ Flags normally have shortened versions, so `--cookies` is equivalent to `-c`.
 
 Flags, commands, and parameters are all specific kind of arguments. A flag is usually setting a Boolean and starts with a `-` , a command usually follows the main program and modifies or specifies the specific behavior (`square` and `add` in the calculator example above), and a parameter is usually what the command is taking in as its input.
 
-## Instructions
 
+Sections:
+1. [Install React Development Tools](#part-1-install-react-development-tools)
+1. [The Square Component](#part-2-the-square-component)
+1. [Lifting State Up](#part-3-lifting-state-up)
+1. [Taking Turns](#part-4-taking-turns)
+1. [Winner Calculator](#part-5-winner-calculation)
+1. [Storing and Showing History](#part-6-storing-and-showing-history)
+1. [Time Travel](#part-7-time-travel)
+1. [Functional Components](#part-8-functional-components)
+1. [Feeling Emboldened?](#part-9-feeling-emboldened)
+1. [Maximum Loopiness](#part-10-maximum-loopiness)
+1. [A Sorting Problem](#part-11-a-sorting-problem)
+1. [Gloat in Victory](#part-12-gloat-in-victory)
+## Instructions
+    <details>
+      <summary>Show Code</summary>
+
+    ```javascript
+    renderSquare(i) {
+        return (
+            <Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
+            />
+        );
+    }
+    ```
+
+    </details>
 ### Features
 
 Our command line Address Book manager should support the following commands:
@@ -47,6 +75,23 @@ Our command line Address Book manager should support the following commands:
 - display
   - Example: `node addressBook.js add John 1234567` - Adds a new Contact item with name `John` and number 1234567
   
+
+> **Note:** Make sure to begin by **importing `AsyncStorage` at the top**, the same place you are importing things like `View`, `Alert`, `Button`, `StyleSheet`, etc.!
+
+> **Tip:** If you are testing with iOS Simulator, you can change the location of the device! Go to the top menu `Debug > Location > Custom Location...` to select a custom latitude and longitude for simulated current location. Some examples are as follows:
+> - **Grand Canyon:** `(36.1128, -113.9961)`
+> - **Austin, TX:** `(30.2672, -97.7431)`
+> - **International House, PHL:** `(39.9552515, -75.1991039)`
+
+
+Sweet baby Jesus! We have location data! Now you can find out the user's
+location, and share it. For now it's just a bunch of bits and bytes inside an
+invisible server somewhere. But that won't be the case for long. Read on, dear
+reader, to see why location data is so freaking awesome.
+
+>**Note:** Take a moment to combine the `touchUser` and `longTouchUser` functions. Functions that share so much code like this are often best combined to reduce complexity and the total amount of code in a given file. Not to mention this makes it easier for someone new to understand your code - they don't need to wonder why you have two nearly identical functions or worse yet misread them as the same and delete one!
+
+> **IMPORTANT:** `MapView` components have 0 height by default, make sure you add the correct styles to make them visible.
 
 Bonus tasks:
 
