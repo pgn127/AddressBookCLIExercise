@@ -115,6 +115,7 @@ Columnify is an npm package that formats console output from objects or arrays o
 [Use columnify's headingTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
 </details>
 - For contacts without phone numbers, display '-None-' instead of '-1'
+<<<<<<< HEAD
 <details>
 <summary>Hint</summary>
 Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
@@ -127,6 +128,28 @@ Checkout [columnify's dataTransform option](https://github.com/timoxley/columnif
 > **Test:** Run your tests!
 
 
+=======
+ <details>
+ <summary>Hint</summary>
+ Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
+ </details>
+ <details>
+   <summary>Super Hint</summary>
+
+    ```javascript
+    function displayContacts(){
+        var output = columnify(data, {
+            dataTransform: function(contactData) {
+                //YOUR CODE HERE
+                //If you are still stuck, try logging contactData to see how dataTransform's function iterates over our data
+            }
+        })
+        console.log(output);
+    }
+    ```
+
+ <details>
+>>>>>>> be6d0831bffdaf01e0ffd318afc8546801036b5a
 ### Goal
 
 ## Part 3: Implementing the 'add' command
