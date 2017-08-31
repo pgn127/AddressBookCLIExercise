@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "name": "Frankie",
+    "number": 123
+  },
+  {
+    "name": "Bob",
+    "number": -1
+  }
+]

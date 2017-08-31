@@ -1,5 +1,5 @@
 
-# Pair Programming Exercise: Address Book using Command Line Arguments 
+# Pair Programming Exercise: Address Book using Command Line Arguments
 
 ## Goal
 
@@ -40,9 +40,9 @@ Our Address Book data is stored in the file called data.json. The address book i
     1. name: a string (letters only!), name of the contact
     2. number: a number (numbers only!), phone number of contact
     3. email: an email, email of contact
-    
-Our Address Book can be accessed from within addressBook.js using our `data` variable (this is already done for you at the top of the file):
 
+Our Address Book can be accessed from within addressBook.js using our `data` variable (this is already done for you at the top of the file):
+[data](./img/datafile.png)
 
 ### Steps
 Sections:
@@ -65,7 +65,7 @@ Our command line Address Book manager should support the following commands:
   - Example: `node addressBook.js add John 1234567` - Adds a new Contact item with name `John` and number 1234567
 - display
   - Example: `node addressBook.js add John 1234567` - Adds a new Contact item with name `John` and number 1234567
-  
+
 ## Part 1: Implementing 'display' command
 ### Goal
 
