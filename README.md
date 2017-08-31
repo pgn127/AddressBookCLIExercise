@@ -109,37 +109,29 @@ Columnify is an npm package that formats console output from objects or arrays o
 
 **NOTE**: Simply calling columnify on our entire addressBook directly will print out our contacts exactly as they are stored in our data array. There are two key things you need to fix:
 - Change the columns so that they read "CONTACT_NAME" and "PHONE_NUMBER"
-<details>
-<summary>Hint</summary>
-[Use columnify's headingTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
-</details>
+    <details>
+    <summary>Hint</summary>
+    [Use columnify's headingTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
+    </details>
 - For contacts without phone numbers, display '-None-' instead of '-1'
 <details>
-    <summary>Hint</summary>
-    <p>Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)</p>
-    <details>
-    <summary>Super Hint: Show Code</summary>
-    ```javascript
-      renderSquare(i) {
-          return (
-              <Square
-                  value={this.state.squares[i]}
-                  onClick={() => this.handleClick(i)}
-              />
-          );
-      }
-  ```
-    </details>
+<summary>Hint</summary>
+Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
 </details>
-
-
-
-
-
-
-    Using columnify, make your output look like this:
-> **Hint:** To get the indenting format, use `\t` before the string
-
+<details>
+<summary>Super Hint</summary>
+```javascript
+function displayContacts(){
+    var output = columnify(data, {
+        dataTransform: function(contactData) {
+            //YOUR CODE HERE
+            //If you are still stuck, try logging contactData to see how dataTransform's function iterates over our data
+        }
+    })
+    console.log(output);
+}
+```
+<details>
 ### Goal
 
 ## Part 3: Implementing the 'add' command
