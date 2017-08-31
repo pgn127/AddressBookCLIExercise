@@ -119,18 +119,20 @@ Columnify is an npm package that formats console output from objects or arrays o
 Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
 </details>
 <details>
-<summary>Super Hint</summary>
-```javascript
-function displayContacts(){
-    var output = columnify(data, {
-        dataTransform: function(contactData) {
-            //YOUR CODE HERE
-            //If you are still stuck, try logging contactData to see how dataTransform's function iterates over our data
-        }
-    })
-    console.log(output);
-}
-```
+  <summary>Super Hint</summary>
+
+   ```javascript
+   function displayContacts(){
+       var output = columnify(data, {
+           dataTransform: function(contactData) {
+               //YOUR CODE HERE
+               //If you are still stuck, try logging contactData to see how dataTransform's function iterates over our data
+           }
+       })
+       console.log(output);
+   }
+   ```
+   
 <details>
 ### Goal
 
