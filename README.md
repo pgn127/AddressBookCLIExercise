@@ -42,7 +42,7 @@ Our Address Book data is stored in the file called data.json. The address book i
     3. email: an email, email of contact
 
 Our Address Book can be accessed from within addressBook.js using our `data` variable (this is already done for you at the top of the file):
-[data](./img/datafile.png)
+![](./img/datafile.png)
 
 ### Steps
 Sections:
