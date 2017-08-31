@@ -86,6 +86,7 @@ function displayContacts(){
     // console.log(columnify(data)); //UNCOMMENT
 
     var output = columnify(data, {
+        minWidth: 20,
         dataTransform: function(contactData) {
             // console.log(contact, typeof contact)
             if(parseInt(contactData)===-1){
@@ -97,8 +98,6 @@ function displayContacts(){
             name: {
                 headingTransform: function(heading) {
                     return "CONTACT_NAME"
-                    heading = "module " + heading
-                    return "*" +  heading.toUpperCase() + "*"
                 }
             },
             number: {
@@ -112,26 +111,6 @@ function displayContacts(){
 
     console.log(output);
 }
-
-
-
-
-    // console.log("");
-    // data.forEach(function(contact){
-    //     var name = contact.name;
-    //     var number = contact.number;
-    //     if(contact.number === -1){
-    //         number = "-None-"
-    //     }
-    //     contacts.append(`\tNAME: ${name} PHONE NUMBER: ${number}`)
-    //
-    // })
-    //
-    //
-    // console.log("");
-    // return
-
-
 
 
 
