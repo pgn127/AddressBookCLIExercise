@@ -2,6 +2,7 @@
 // The node builtin filesystem library.
 var fs = require('fs');
 var validator = require('validator')
+var columnify = require('columnify')
 
 var JSON_FILE = 'data.json'
 // If data.json file doesn't exist, create an empty one
@@ -11,7 +12,7 @@ var data = JSON.parse(fs.readFileSync(JSON_FILE));
 
 
 
-//PART1: ------PARSING COMMAND LINE INPUT----------------------------------------------
+//PART1: PARSING COMMAND LINE ARGUMENTS
 //To access what was typed into the command line, use process.argv
 // If no arguments are specified print help.
 if (process.argv.length === 2 || process.argv === "help" || process.argv === "-h") {
@@ -25,18 +26,17 @@ argv.splice(0,2); //remove 'node' and path from args, NOTE: splicing modifies pr
 
 
 //TODO: Implement parseCommand()
-//Parse and return the command from stdin, examples:
-// STDIN: node addressBook.js add John 123      RETURN ----> 'add'
-// STDIN: node addressBook.js update John 456   RETURN ----> 'update'
-// STDIN: node addressBook.js delete John       RETURN ----> 'delete'
-// STDIN: node addressBook.js                   RETURN ----> ''
-//Hint: use process.argv
+/**
+* Using process.argv, find and return the command. The command will be the first argument the user types. The possible commands are add, update, display, delete, help
+* $ node addressBook.js add Moose 123   ----> 'add'
+* $ node addressBook.js                ----> ''
+* @param  {}
+* @return {[string]}     Return the command or "" if there was no command.
+*/
 function parseCommand() {
   // YOUR CODE HERE
   var args = process.argv
-  console.log(args);
-  // args.splice(0,2)
-  // args = args.slice(2,args.length)
+
   if(args.length == 0){
       return ""
   } else{
@@ -44,8 +44,7 @@ function parseCommand() {
   }
 }
 
-
-
+//store the command and execute its corresponding function
 var input = parseCommand()
 switch(input){
     case "add":
@@ -63,32 +62,80 @@ switch(input){
     case "help":
         break
     default:
-        console.log('No actions provided',input);
-}
-
-// Arguments
-// This line is part of the 'Commander' module. It tells them (Commander) to process all the
-// other arguments that are sent to our program with no specific name.
-// program.parse(process.argv);
-//
-// // If no arguments are specified print help.
-// if (process.argv.length === 2) {
-//   program.help();
-// }
-
-
-
-// This is a function that converts remaining unprocessed arguments into a string
-// so we can create tasks using it.
-function getRemainingArgs () {
-    var remainingArgs = process.argv
-    remainingArgs.splice(0,1)
-    return remainingArgs
+        console.log('No actions provided');
 }
 
 
 
+//----------------- PART 2 ---------------------//
+//Implement displayContacts()
+/**
+* Display the contacts in the address book in the format "Name: ContactName  Phone Number: ContactNumber"
+* If the contact does not have a phone number listed, you should display "Name: ContactName  Phone Number: -None-"
+* $ node addressBook.js display   ----> Name: Ricky  Phone Number: 123
+                                        Name: Moose  Phone Number: 456
+                                        Name: Graham  Phone Number: -None-
+* @param  {}
+* @return {[string]}     Return the command or "" if there was no command.
+*/
 
+
+function displayContacts(){
+    //YOUR CODE HERE
+
+    // console.log(columnify(data)); //UNCOMMENT
+
+    var output = columnify(data, {
+        dataTransform: function(contactData) {
+            // console.log(contact, typeof contact)
+            if(parseInt(contactData)===-1){
+                return '-None-'
+            }
+            return contactData
+        },
+        config: {
+            name: {
+                headingTransform: function(heading) {
+                    return "CONTACT_NAME"
+                    heading = "module " + heading
+                    return "*" +  heading.toUpperCase() + "*"
+                }
+            },
+            number: {
+                headingTransform: function(heading) {
+                    return "PHONE_NUMBER"
+
+                }
+            }
+        }
+    })
+
+    console.log(output);
+}
+
+
+
+
+    // console.log("");
+    // data.forEach(function(contact){
+    //     var name = contact.name;
+    //     var number = contact.number;
+    //     if(contact.number === -1){
+    //         number = "-None-"
+    //     }
+    //     contacts.append(`\tNAME: ${name} PHONE NUMBER: ${number}`)
+    //
+    // })
+    //
+    //
+    // console.log("");
+    // return
+
+
+
+
+
+//----------------- PART 3 ---------------------//
 //TODO: Write a function to create a new contact
 // Example: This is a function that is called to create a new contact.
 // Calling `node add contactName contactNumber ` must call our function addContact.
@@ -96,7 +143,7 @@ function getRemainingArgs () {
 //You should only create a new contact if a name is provided
 //if no number is provided, store -1 as their number
 function addContact() {
-  var args = getRemainingArgs()
+  var args = process.argv.slice(1,process.argv.length)//getRemainingArgs()
   if(args){
       var name = args[0]
     //   var number = "abc123"
@@ -124,9 +171,7 @@ function deleteContact(){
     return
 }
 
-function showContacts(){
-    return
-}
+
 
 // Write function showTasks(). It is be called when the program is called like
 // 'node addressBook.js show' or 'node addressBook.js show -i 3'
@@ -194,6 +239,7 @@ function ensureFileExists() {
 
 // This command writes  our tasks to the disk
 writeFile(data);
+
 
 //export functions for spec
 module.exports = {

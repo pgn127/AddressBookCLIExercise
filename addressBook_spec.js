@@ -22,6 +22,49 @@ var child_process = require('child_process');
 //         // expect(app.getCommand).toHaveBeenCalled()//toEqual('add')
 //     })
 // })
+describe("Displaying Contacts", function() {
+    // beforeEach(function() {
+    //   //resets data before all tests
+    //   jsonfile.writeFileSync(file, []);
+    // });
+//TODO: display name
+    it("displays all contacts in the correct format when contacts exist", function(){
+        jsonfile.writeFileSync(file, [
+          {
+            "name": "Moose",
+            "number": 123
+          },
+          {
+            "name": "Ricky",
+            "number": 456
+          }
+        ]);
+        var stdout = runAndCleanStdout('node addressBook.js display');
+        expect(stdout.length).toBe(4);
+        expect(stdout[1].trim()).toEqual('NAME: Moose PHONE NUMBER: 123');
+        expect(stdout[2].trim()).toEqual('NAME: Ricky PHONE NUMBER: 456');
+
+    })
+
+    it("displays '-None-' for the number field when contact does not have a phone number", function(){
+        jsonfile.writeFileSync(file, [
+          {
+            "name": "Moose",
+            "number": 123
+          },
+          {
+            "name": "Ricky",
+            "number": -1
+          }
+        ]);
+        var stdout = runAndCleanStdout('node addressBook.js display');
+        expect(stdout.length).toBe(4);
+        expect(stdout[1].trim()).toEqual("NAME: Moose PHONE NUMBER: 123");
+        expect(stdout[2].trim()).toEqual("NAME: Ricky PHONE NUMBER: -None-");
+
+
+    })
+})
 describe("Adding Contacts", function() {
     beforeEach(function() {
       //resets data before all tests

@@ -21,11 +21,6 @@ In this exercise we will build a command line tool in JavaScript and use NodeJS 
 Flags normally have shortened versions, so `--cookies` is equivalent to `-c`.
 `node myProgram.js -c`
 
-### Commands
-
-**Commands** are arguments that specify specific actions. You can run:
-`node myProgram.js doSomething`. `doSomething` is not a flag, since it doesn't begin with `--` - it is an argument or sub-command for the `node myProgram.js` command line tool. Consider if `myProgram.js` was a calculator application; then `node myProgram.js add` contains the command `add` and `node myProgram.js delete` contains the command `delete`. Commands given to a program are just special arguments that modify the behavior of the app/tool we are running.
-
 ### Arguments
 
 **Arguments** We can pass also pass strings or numbers into our program to be used as arguments or parameters.
@@ -70,8 +65,81 @@ Our command line Address Book manager should support the following commands:
 
 
 ## Part 1: Parsing Command Line Arguments
+**Commands** are arguments that specify specific actions. You can run:
+`node myProgram.js doSomething`. `doSomething` is not a flag, since it doesn't begin with `--` - it is an argument or sub-command for the `node myProgram.js` command line tool. Consider if `myProgram.js` was a calculator application; then `node myProgram.js add` contains the command `add` and `node myProgram.js delete` contains the command `delete`. Commands given to a program are just special arguments that modify the behavior of the app/tool we are running.
+
+#### Task: Implement parseCommand()
+In order to for our application to determine which action/command to perform, you parse the specified command from the command line arguments.
+This function should parse the command argument from the command line using `process.argv` and return it.
+
+The command will be the first argument: <br>
+`$ node addressBook.js add John 123`    parseCommand() returns 'add' <br>
+`$ node addressBook.js display`         parseCommand() returns 'display' <br>
+`$ node addressBook.js`                 parseCommand() returns '' <br>
+
+
+> **Note:** If you need a refresher on what `process.argv` is, see [here](https://www.google.com)
+
 
 ## Part 2: Implementing the 'display' command
+Write the function displayContacts(). It will be called in the following ways:<br>
+`$ node addressBook.js display` <br>
+`$ node addressBook.js display ContactName`<br>
+`$ node addressBook.js display ContactNumber`<br>
+
+This function should output the appropriate contacts using console.log() and [columnify npm package](https://www.npmjs.com/package/columnify). <br> Contacts that do not have a phone number (for which we put -1 as the placeholder), should be displayed with '-None-' in place of their number, as follows: <br>
+NAME: ContactName PHONE NUMBER: -None-
+
+#### Using columnify
+Columnify is an npm package that formats console output from objects or arrays of objects into organized columns.
+
+##### Steps
+ 1. `npm install --save columnify`
+ 2. At the top of addressBook.js `var columnify = require('columnify')`
+ 3. Inside displayContacts(), uncomment the line labeled 'UNCOMMENT'
+ <img src="./img/columnoutput.png" width="350">
+
+ then run `$ node addressBook.js display` to see how columnify works!
+ <details>
+   <summary>Show Result</summary>
+   <img src="./img/terminalcolumns.png" width="400">
+ </details>
+ 4. Use columnify so your terminal output looks like this:
+
+
+**NOTE**: Simply calling columnify on our entire addressBook directly will print out our contacts exactly as they are stored in our data array. There are two key things you need to fix:
+- Change the columns so that they read "CONTACT_NAME" and "PHONE_NUMBER"
+<details>
+<summary>Hint</summary>
+[Use columnify's headingTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)
+</details>
+- For contacts without phone numbers, display '-None-' instead of '-1'
+<details>
+    <summary>Hint</summary>
+    <p>Checkout [columnify's dataTransform option](https://github.com/timoxley/columnify#transforming-column-data-and-headers)</p>
+    <details>
+    <summary>Super Hint: Show Code</summary>
+    ```javascript
+      renderSquare(i) {
+          return (
+              <Square
+                  value={this.state.squares[i]}
+                  onClick={() => this.handleClick(i)}
+              />
+          );
+      }
+  ```
+    </details>
+</details>
+
+
+
+
+
+
+    Using columnify, make your output look like this:
+> **Hint:** To get the indenting format, use `\t` before the string
+
 ### Goal
 
 ## Part 3: Implementing the 'add' command
@@ -90,7 +158,7 @@ Our command line Address Book manager should support the following commands:
     <details>
       <summary>Show Code</summary>
 
-    ```javascript
+      ```javascript
     renderSquare(i) {
         return (
             <Square
