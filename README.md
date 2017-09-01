@@ -194,7 +194,6 @@ The update command is called to update an existing contact. You can update eithe
 ## BONUS Part 5: Implementing the 'delete' command
 ### Goal
 
-
 ### Flags
 
 **Flags** are boolean values that are set by being included when calling the program.
