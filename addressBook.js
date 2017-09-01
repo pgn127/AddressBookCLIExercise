@@ -1,9 +1,6 @@
 "use strict";
 // The node builtin filesystem library.
 var fs = require('fs');
-var validator = require('validator')
-var columnify = require('columnify')
-
 var JSON_FILE = 'data.json'
 // If data.json file doesn't exist, create an empty one
 ensureFileExists();
@@ -78,38 +75,11 @@ switch(input){
 * @param  {}
 * @return {[string]}     Return the command or "" if there was no command.
 */
-
-
 function displayContacts(){
     //YOUR CODE HERE
 
     // console.log(columnify(data)); //UNCOMMENT
 
-    var output = columnify(data, {
-        minWidth: 20,
-        dataTransform: function(contactData) {
-            // console.log(contact, typeof contact)
-            if(parseInt(contactData)===-1){
-                return '-None-'
-            }
-            return contactData
-        },
-        config: {
-            name: {
-                headingTransform: function(heading) {
-                    return "CONTACT_NAME"
-                }
-            },
-            number: {
-                headingTransform: function(heading) {
-                    return "PHONE_NUMBER"
-
-                }
-            }
-        }
-    })
-
-    console.log(output);
 }
 
 
@@ -118,89 +88,32 @@ function displayContacts(){
 //TODO: Write a function to create a new contact
 // Example: This is a function that is called to create a new contact.
 // Calling `node add contactName contactNumber ` must call our function addContact.
-// it should get the name and number of the Contact by calling getRemainingArgs()
+// it should get the name and number of the Contact from process.argv
 //You should only create a new contact if a name is provided
 //if no number is provided, store -1 as their number
 function addContact() {
-  var args = process.argv.slice(1,process.argv.length)//getRemainingArgs()
-  if(args){
-      var name = args[0]
-    //   var number = "abc123"
-      var number = args[1] || "-1"
-      if(name &&  validator.isAlpha(name) && validator.isNumeric(number)){
-
-          data.push({
-            name: name,
-            number: parseInt(number)
-          });
-          console.log("Added contact named: "+ name + ", with id: " + data.length +", and number: " + number);
-      } else {
-          console.log('No contact name provided');
-      }
-  }
 
 }
 
 
+//----------------- PART 4 ---------------------//
+//TODO: Write a function to update
+// Example: This is a function that is called to create a new contact.
+// Calling `node add contactName contactNumber ` must call our function addContact.
+// it should get the name and number of the Contact from process.argv
+//You should only create a new contact if a name is provided
+//if no number is provided, store -1 as their number
 function updateContact(){
-    return
+
 }
 
+
+//BONUS Implement deleteContact
 function deleteContact(){
     return
 }
 
 
-
-// Write function showTasks(). It is be called when the program is called like
-// 'node addressBook.js show' or 'node addressBook.js show -i 3'
-// This function should output the appropriate TO-Do tasks using console.log().
-// The format of the output should be exactly:
-// Task #ID Priority PRIORITY: NAME
-//
-// Note:
-// - if there is a flag value for id, the program should only display that task
-// - it there is no flag id, the program should return all tasks.
-// - the id of a task is its index in 'data' + 1, we count ids up from 1.
-//
-// ex.
-//  data = [{name: "Do Laundry", priority: 3},
-//          {name: "Clean dishes", priority: 2},
-//          {name:"Call Mark", priority: 1}]
-
-//  node addressBook.js show -i 2 -> "Task #2 Priority 2: Clean Dishes"
-//  node addressBook.js show ->
-//            "Task #1 Priority 3: Do Laundry
-//             Task #2 Priority 2: Clean Dishes
-//             Task #3 Priority 1: Call Mark"
-function showTasks(){
-  // YOUR CODE HERE
-  if(program.id){
-    var id = program.id-1;
-    console.log("Task #"+(program.id)+" Priority "+data[id].priority+ ": "+data[id].name)
-  }else{
-    for (var i=0; i<data.length; i++){
-      console.log("Task #"+(i+1)+" Priority "+data[i].priority+ ": "+data[i].name)
-    }
-  }
-}
-
-
-// Write a function that is called when the command `node addressBook.js delete -i 3`
-// is run. Take the id from program.id and delete the element with that index from 'data'.
-// Hint: use splice() here too!
-// function deleteTask(){
-//   // YOUR CODE HERE
-//   if(program.id){
-//     var id = program.id-1;
-//     if (id>=0 && id<data.length){
-//       data.splice(id, 1);
-//       console.log("Deleted task with id: "+program.id)
-//     }
-//   } else{
-//     console.log("No task specified")
-//   }
-// }
 
 // ---Utility functions---
 

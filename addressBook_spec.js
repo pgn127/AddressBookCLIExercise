@@ -40,10 +40,32 @@ describe("Displaying Contacts", function() {
           }
         ]);
         var stdout = runAndCleanStdout('node addressBook.js display');
-        expect(stdout.length).toBe(4);
-        expect(stdout[1].trim()).toEqual('NAME: Moose PHONE NUMBER: 123');
-        expect(stdout[2].trim()).toEqual('NAME: Ricky PHONE NUMBER: 456');
+        expect(stdout.length).toBe(3);
+        var moose = stdout[1].split(/[ ]+/)
+        var ricky = stdout[2].split(/[ ]+/)
+        expect(moose[0]).toEqual('Moose')
+        expect(ricky[0]).toEqual('Ricky')
+        expect(moose[1]).toEqual('123')
+        expect(ricky[1]).toEqual('456')
 
+
+    })
+
+    it('displays the correct headers', function() {
+        jsonfile.writeFileSync(file, [
+          {
+            "name": "Moose",
+            "number": 123
+          },
+          {
+            "name": "Ricky",
+            "number": -1
+          }
+        ]);
+        var stdout = runAndCleanStdout('node addressBook.js display');
+        var header = stdout[0].trim().split(/[ ]+/)
+        expect(header[0]).toEqual("CONTACT_NAME")
+        expect(header[1]).toEqual("PHONE_NUMBER")
     })
 
     it("displays '-None-' for the number field when contact does not have a phone number", function(){
@@ -58,11 +80,12 @@ describe("Displaying Contacts", function() {
           }
         ]);
         var stdout = runAndCleanStdout('node addressBook.js display');
-        expect(stdout.length).toBe(4);
-        expect(stdout[1].trim()).toEqual("NAME: Moose PHONE NUMBER: 123");
-        expect(stdout[2].trim()).toEqual("NAME: Ricky PHONE NUMBER: -None-");
-
-
+        var moose = stdout[1].split(/[ ]+/)
+        var ricky = stdout[2].split(/[ ]+/)
+        expect(moose[0]).toEqual('Moose')
+        expect(ricky[0]).toEqual('Ricky')
+        expect(moose[1]).toEqual('123')
+        expect(ricky[1]).toEqual('-None-')
     })
 })
 describe("Adding Contacts", function() {
@@ -113,16 +136,58 @@ describe("Adding Contacts", function() {
 
 
 
-// describe("Updating Contacts", function() {
-//     beforeEach(function() {
-//       //resets data before all tests
-//       jsonfile.writeFileSync(file, []);
-//     });
-//
-//
-//
-//
-// })
+describe("Updating Contacts", function() {
+    beforeEach(function() {
+        //resets data before all tests
+        jsonfile.writeFileSync(file, [
+            {
+                "name": "Moose",
+                "number": 123
+            },
+            {
+                "name": "Ricky",
+                "number": 456
+            },
+            {
+                "name": "Graham",
+                "number": 789
+            }
+        ]);
+    });
+
+    it("Updates the contact's number when only number argument is passed", function() {
+        child_process.execSync('node addressBook.js update Moose 999');
+        var data = jsonfile.readFileSync(file)
+        expect(data.length).toBe(3)
+        expect(data[0]).toEqual({"name": "Moose", "number": 999})
+
+    });
+
+    it("Updates the contact's name when only name argument is passed", function() {
+        child_process.execSync('node addressBook.js update Moose Moooose');
+        var data = jsonfile.readFileSync(file)
+        expect(data.length).toBe(3)
+        expect(data[0]).toEqual({"name": "Moooose", "number": 123})
+    });
+
+    it("Does not make any changes when contact does not exist", function() {
+        child_process.execSync('node addressBook.js update Pam 516');
+        var data = jsonfile.readFileSync(file)
+        expect(data.length).toBe(3)
+        expect(data[0]).toEqual({"name": "Moose", "number": 123})
+        expect(data[1]).toEqual({"name": "Ricky", "number": 456})
+        expect(data[2]).toEqual({"name": "Graham", "number": 789})
+    });
+
+    it("Console logs a message when contact does not exist", function() {
+        var stdout = runAndCleanStdout('node addressBook.js update Pam 516');
+        expect(stdout.length).toBe(1);
+        expect(stdout[0]).toEqual("No contact found");
+    });
+
+
+
+})
 
 
 describe("Test addressBook.js", function() {
