@@ -79,8 +79,7 @@ Our command line Address Book manager should support the following commands:
 
 Let's get started!
 
-<br>
-<br>
+
 ## Part 1: Parsing Command Line Arguments
 **Commands** are arguments that specify specific actions. You can run:
 `node myProgram.js doSomething`. `doSomething` is not a flag, since it doesn't begin with `--` - it is an argument or sub-command for the `node myProgram.js` command line tool. Consider if `myProgram.js` was a calculator application; then `node myProgram.js add` contains the command `add` and `node myProgram.js delete` contains the command `delete`. Commands given to a program are just special arguments that modify the behavior of the app/tool we are running.
@@ -144,8 +143,6 @@ Checkout [columnify's dataTransform option](https://github.com/timoxley/columnif
 
 > **Test:** Run your tests!
 
-<br>
-<br>
 ## Part 3: Implementing the 'add' command
 Write the function addContact(). It will be called in the following ways:<br>
 `$ node addressBook.js add Darwish 123` <br>
