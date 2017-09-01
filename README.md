@@ -195,14 +195,6 @@ The update command is called to update an existing contact. You can update eithe
 ### Goal
 
 
-> **Note:** Make sure to begin by **importing `AsyncStorage` at the top**, the same place you are importing things like `View`, `Alert`, `Button`, `StyleSheet`, etc.!
-
-> **Tip:** If you are testing with iOS Simulator, you can change the location of the device! Go to the top menu `Debug > Location > Custom Location...` to select a custom latitude and longitude for simulated current location. Some examples are as follows:
-> - **Grand Canyon:** `(36.1128, -113.9961)`
-> - **Austin, TX:** `(30.2672, -97.7431)`
-> - **International House, PHL:** `(39.9552515, -75.1991039)`
-
-
 ### Flags
 
 **Flags** are boolean values that are set by being included when calling the program.
